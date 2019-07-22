@@ -27,8 +27,23 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    {
+      resolve: "gatsby-source-wordpress",
+      options: {
+        baseUrl: "http://stupid-anteater.w6.poopy.life",
+        protocol: "http",
+        hostingWPCOM: false,
+        useACF: false,
+        verboseOutput: true,
+        // Set how many pages are retrieved per API request.
+        perPage: 100,
+        // Set how many simultaneous requests are sent at once.
+        concurrentRequests: 10,
+        // use a custom normalizer which is applied after the built-in ones.
+        normalizer: function({ entities }) {
+          return entities
+        },
+      },
+    },
   ],
 }
